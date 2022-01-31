@@ -1,0 +1,26 @@
+##### Using a single state to hold form values
+
+// const [userInput,setUserInput] = useState({
+    //     title:'',
+    //     amount:'',
+    //     date:'',
+    // });
+
+
+        // setUserInput({
+        //     ...userInput,
+        //     title:e.target.value,
+        // })
+
+        or
+
+        // setUserInput((previousState)=>{
+        //    return{ ...previousState,
+        //     title:e.target.value}
+        // });
+
+
+          //let date = new Date("2022-01-20")
+    //console.log(date.getFullYear())
+    //console.log(date.toLocaleString('en-US',{day:'2-digit'}))
+    //console.log(date.toLocaleString('en-US',{month:'long'}))

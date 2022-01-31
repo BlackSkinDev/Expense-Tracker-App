@@ -1,0 +1,20 @@
+
+.filter-section{
+    display: flex;
+}
+.filter-dropdown{
+    margin-left: auto;
+}
+.filter-heading{
+    color: white;
+    font-size:25px;
+}
+
+.filter-select{
+    border: 1px solid #ccc;
+    font: inherit;
+    border-radius: 1px;
+    width: 150px !important;
+    height:40px !important;
+
+}
