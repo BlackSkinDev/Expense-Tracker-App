@@ -1,10 +1,13 @@
 import React,{useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Expenses/NewExpense.css'
 import ExpenseForm from './ExpenseForm'
 
 const  NewExpense = (props)=> {
 
 const [isEditing, setIsEditing] = useState(false);
+
+const navigate = useNavigate();
 
 const saveExpenseDataHandler = (enteredExpenseData)=>{
     const expenseData = {
@@ -16,7 +19,14 @@ const saveExpenseDataHandler = (enteredExpenseData)=>{
 }
 
   const startEditingHandler = () => {
-    setIsEditing(true);
+    if (localStorage.getItem('token')) {
+      setIsEditing(true);
+    }
+    else{
+        alert("Please kindly create an account to manage your expenses!")
+        navigate("/register")
+    }
+    
   };
 
   const stopEditingHandler = () => {

@@ -24,3 +24,33 @@
     //console.log(date.getFullYear())
     //console.log(date.toLocaleString('en-US',{day:'2-digit'}))
     //console.log(date.toLocaleString('en-US',{month:'long'}))
+
+    {
+      id: 'e1',
+      title: 'Toilet Paper',
+      amount: 94.12,
+      date: '2020-01-09',
+  },
+  { 
+    id: 'e2',
+    title: 'New TV',
+    amount: 799.49,
+    date: '2022-02-15'},
+  {
+      id: 'e3',
+      title: 'Car Insurance',
+      amount: 294.67,
+      date: '2021-01-19',
+  },
+  {
+      id: 'e4',
+      title: 'New Desk (Wooden)',
+      amount: 450,
+      date: '2022-01-25',
+  },
+  {
+    id: 'e5',
+    title: 'New Desk ',
+    amount: 450,
+    date: '2019-01-25',
+},

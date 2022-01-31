@@ -4,7 +4,6 @@ import '../styles/Expenses/ExpenseItemsList.css'
 function ExpenseItemsList(props) {
 
 
-
 if (props.expenses.length === 0) {
     return <div className="my-expenses"><h3 className="no-expense-header">Oops, Seems you have no expenses saved at this moment.</h3></div>
 } 
