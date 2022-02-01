@@ -1,11 +1,13 @@
 import React,{useState} from 'react';
- import { Link } from "react-router-dom";
+ import { Link,useNavigate } from "react-router-dom";
 import '../styles/Auth/Auth.css'
+import {registerUser} from '../services/AuthService'
 
 function Register() {
   const [username,setUsername] = useState('')
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
+  const [cpassword,setCpassword] = useState('')
   
   const usernameHandler = (e)=>{
       setUsername(e.target.value)
@@ -18,19 +20,28 @@ function Register() {
       setPassword(e.target.value)
   }
 
-  const submitHandler = (e)=>{
+  const cpasswordHandler = (e)=>{
+    setCpassword(e.target.value)
+}
+
+  const submitHandler = async(e)=>{
       e.preventDefault()
       const userData={
           username:username,
           email:email,
-          password:password
+          password:password,
+          password_confirmation:cpassword
       } 
-      console.log(userData)
+     
+    const registerUserResponse = await registerUser(userData);
+    console.log("hey")
+    
     
   }
   return<div>
           <h1 className="auth-header">Register</h1>
           <div className="auth-register-box">
+          <a  className="slink" href={'/'}>Home</a>
             <form onSubmit={submitHandler}>
                   <div className="auth-new-expense__controls">
                       
@@ -48,6 +59,12 @@ function Register() {
                           <label>Password</label>
                           <input type="password" value={password}  onChange={passwordHandler} required autoComplete="on" />
                       </div>
+                    
+                      <div className="auth-new-expense__control">
+                          <label>Confirm Password</label>
+                          <input type="password" value={cpassword}  onChange={cpasswordHandler} required autoComplete="on" />
+                      </div>
+
                   </div>
                   
                   <div className="auth-register-form__actions">
@@ -55,7 +72,7 @@ function Register() {
                       <button type="submit">Register</button>
                   </div>    
               </form>
-              <a  className="slink" href={'/'}>Home</a>
+            
                 
         </div>
     </div>

@@ -26,9 +26,10 @@ const Login = ()=> {
   return <div>
         <h1 className="auth-header">Login</h1>
         <div className="auth-login-box">
+        <a  className="slink" href={'/'}>Home</a>
           <form onSubmit={submitHandler}>
                 
-                    <div className="auth-new-expense__control">
+                    <div className="auth-new-expense__control first-div">
                         <label>Email</label>
                         <input type="email" value={email}  onChange={emailHandler} required autoComplete="on"  />
                     </div>
@@ -44,7 +45,7 @@ const Login = ()=> {
                 </div>
 
             </form>
-            <a  className="slink" href={'/'}>Home</a>
+           
       </div>
       </div>
 }
