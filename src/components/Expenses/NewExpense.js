@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Expenses/NewExpense.css'
-import ExpenseForm from './ExpenseForm'
+import ExpenseForm from './Forms/ExpenseForm'
 
 const  NewExpense = (props)=> {
 
