@@ -4,6 +4,8 @@ import NewExpense from './NewExpense';
 import ExpenseFilter from './ExpenseFilter';
 import  {computeFilteredExpenses,getAllExpenses} from '../services/ExpenseService';
 import ExpensesChart from './ExpensesChart';
+import {useNavigate } from "react-router-dom";
+import { useMergeState } from "use-merge-state"
 
 
 
@@ -29,8 +31,11 @@ const all_expenses = [
 
 
 const Expenses = ()=> {
+
+  const navigate = useNavigate();
  
-  const [expenses,setExpenses] = useState([]);
+  const [expenses, setExpenses] = useState([])
+
   const [filteredExpenses,setFilteredExpenses] = useState(expenses)
   const [users,SetUsers] = useState([])
 
@@ -60,8 +65,21 @@ const Expenses = ()=> {
   }
 
   useEffect(() => {
-    
-  }, [users]); // Only re-run the effect if count changes
+
+      const fetchUserExpenses = async () => {
+         const response = await getAllExpenses()
+          if (response.status===401) {
+              alert("You session has expired, Please Login again.");
+              navigate('/login');
+          }
+         
+        setFilteredExpenses(previousFilteredExpenses=>{
+            return[...response.data]
+         });         
+       
+      }
+      fetchUserExpenses()
+  }, [navigate]); // Only re-run the effect if count changes
 
   
   return (

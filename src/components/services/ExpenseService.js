@@ -1,6 +1,12 @@
 import Axios from 'axios'
 import BASE_URL from '../Constant.js'
 
+const token = localStorage.getItem('token')
+const config = {
+  headers: { Authorization: `Bearer ${token}` }
+};
+
+
 export const computeFilteredExpenses = (expenses,year) =>{
    let res = [];
    expenses.forEach(exp=>{
@@ -11,10 +17,10 @@ export const computeFilteredExpenses = (expenses,year) =>{
    return res;
 }
 
-export const getAllExpenses = async (userData)=>{
+export const getAllExpenses = async ()=>{
    
     try{
-      const { data: {status, message, data} } =   await Axios.get(`${BASE_URL}/expenses`);
+      const { data: {status, message, data} } =   await Axios.get(`${BASE_URL}/expenses`,config);
       return {
         status,
         message,
@@ -22,10 +28,9 @@ export const getAllExpenses = async (userData)=>{
       };
     }
     catch(error){
-      const {data:{status,data,message}}=error.response
+      const {data:{message},status}=error.response
       return {
           status,
-          data,
           message,
       }
     }
