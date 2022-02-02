@@ -25,12 +25,12 @@ function LoginForm(props) {
          <form onSubmit={submitHandler}>
             <div className="auth-new-expense__control first-div">
                 <label>Email</label>
-                <input type="email" value={email}  onChange={emailHandler} required autoComplete="on"  />
+                <input type="email" value={email}  onChange={emailHandler}  autoComplete="on"  />
             </div>
 
             <div className="auth-new-expense__control" style={{marginTop:'20px'}}>
                 <label>Password</label>
-                <input type="password" value={password}  onChange={passwordHandler} required autoComplete="on"  />
+                <input type="password" value={password}  onChange={passwordHandler}  autoComplete="on"  />
             </div>
         
             <div className="" style={{marginTop:'40px'}}>

@@ -12,12 +12,33 @@ export const registerUser = async (userData)=>{
     };
   }
   catch(error){
-    const { status,message,data } = error.response.data;
+    const {data:{status,data }}=error.response
+    return {
+        status,
+        data
+    }
+  }
+      
+}
+
+export const loginUser = async (userData)=>{
+   
+  try{
+    const { data: {status, message, data} } =   await Axios.post(`${BASE_URL}/login`,userData);
     return {
       status,
       message,
       data
     };
   }
+  catch(error){
+    const {data:{status,data,message}}=error.response
+    return {
+        status,
+        data,
+        message,
+    }
+  }
       
 }
+

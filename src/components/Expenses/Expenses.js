@@ -1,9 +1,10 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import ExpenseItemsList from './ExpenseItemsList';
 import NewExpense from './NewExpense';
 import ExpenseFilter from './ExpenseFilter';
-import  {computeFilteredExpenses} from '../services/ExpenseService';
+import  {computeFilteredExpenses,getAllExpenses} from '../services/ExpenseService';
 import ExpensesChart from './ExpensesChart';
+
 
 
 const all_expenses = [
@@ -27,11 +28,11 @@ const all_expenses = [
 ];
 
 
-const App = ()=> {
+const Expenses = ()=> {
  
-  const [expenses,setExpenses] = useState(all_expenses);
+  const [expenses,setExpenses] = useState([]);
   const [filteredExpenses,setFilteredExpenses] = useState(expenses)
-
+  const [users,SetUsers] = useState([])
 
 
   const addExpenseHandler = (expense) => { 
@@ -58,20 +59,28 @@ const App = ()=> {
     }
   }
 
+  useEffect(() => {
+    
+  }, [users]); // Only re-run the effect if count changes
+
   
   return (
     <div>
         <h1 className="head">Expense Tracker</h1>
         <NewExpense onAddExpense={addExpenseHandler} />
-        <div className="my-expenses">
-          <ExpenseFilter  onChangeFilter={onChangeFilterHandler}/>
-          <ExpensesChart expenses={filteredExpenses} />
-          <ExpenseItemsList expenses={filteredExpenses}/>   
-        </div>   
+        {filteredExpenses.length === 0 ?
+            <h1 style={{textAlign: 'center'}}>Please wait...</h1> :
+            <div className="my-expenses">
+              <ExpenseFilter  onChangeFilter={onChangeFilterHandler}/>
+              <ExpensesChart expenses={filteredExpenses} />
+              <ExpenseItemsList expenses={filteredExpenses}/>   
+            </div>   
+        }    
+       
     </div>
   );
 }
-export default App;
+export default Expenses;
 
 
 
