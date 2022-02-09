@@ -37,3 +37,24 @@ export const getAllExpenses = async ()=>{
     }
         
   }
+
+
+  export const saveExpense = async (expense) => {
+      try{
+        const { data: {status, message, data} } =   await Axios.post(`${BASE_URL}/expenses`,expense,config);
+        return {
+          status,
+          message,
+          data
+        };
+      }
+      catch(error){
+        const  { data: {status, message, data} }=error.response
+        return {
+            status,
+            message,
+            data
+        }
+      }
+          
+    }

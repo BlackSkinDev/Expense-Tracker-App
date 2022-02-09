@@ -1,6 +1,7 @@
 
 .filter-section{
     display: flex;
+    margin-top: 2rem;
 }
 .filter-dropdown{
     margin-left: auto;

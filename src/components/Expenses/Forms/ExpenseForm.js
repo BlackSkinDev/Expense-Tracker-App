@@ -5,6 +5,8 @@ const Expenseform = (props)=> {
     const [amount,setAmount] = useState('')
     const [date,setDate] = useState('')
     
+    const errors =props.errors;
+    
     const titleHandler = (e)=>{
         setTitle(e.target.value)
         
@@ -16,21 +18,36 @@ const Expenseform = (props)=> {
         setDate(e.target.value)
     }
 
+
+
     const submitHandler = (e)=>{
         e.preventDefault()
         const expenseData={
-            title:title,
+            label:title,
             amount:amount,
-            date:new Date(date),
+            date:date,
         }
         props.onSaveExpenseData(expenseData)
-        setDate('')
-        setTitle('')
-        setAmount('')
+        // if(errors.length<1){
+        //     setDate('')
+        //     setTitle('')
+        //     setAmount('')
+        // }
+      
+      
     }
 
     return (
+        <>
+        <div className="error-div">
+        <ul className="error-lists">
+        {errors.length>0 &&errors.map(err=>{
+            return <li key={err}>{err}</li>
+        })}
+        </ul>
+    </div> 
         <form onSubmit={submitHandler}>
+            
             <div className="new-expense__controls">
                 
                 <div className="new-expense__control">
@@ -55,6 +72,7 @@ const Expenseform = (props)=> {
             </div>
 
         </form>
+        </>
     )
 }
 

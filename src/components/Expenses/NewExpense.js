@@ -12,10 +12,10 @@ const navigate = useNavigate();
 const saveExpenseDataHandler = (enteredExpenseData)=>{
     const expenseData = {
         ...enteredExpenseData,
-        id:Math.random().toString(),
+       
     }
     props.onAddExpense(expenseData)
-    setIsEditing(false);
+    //setIsEditing(false);
 }
 
   const startEditingHandler = () => {
@@ -41,9 +41,12 @@ const saveExpenseDataHandler = (enteredExpenseData)=>{
         <button onClick={startEditingHandler}>Add New Expense</button>
       )}
       {isEditing && (
+        
         <ExpenseForm
           onSaveExpenseData={saveExpenseDataHandler}
           onCancel={stopEditingHandler}
+          errors={props.errors}
+         
         />
       )}
     </div>
