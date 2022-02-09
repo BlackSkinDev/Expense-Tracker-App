@@ -18,6 +18,10 @@ const chartDataPoints = [
     {label: 'Dec', value:0},
 ];
 
+if(props.expenses.length === 0){
+    return <></>
+}
+
 for(const expense of props.expenses){
     const expenseMonth = (new Date(expense.date)).getMonth();
     chartDataPoints[expenseMonth].value+=expense.amount;

@@ -2,6 +2,7 @@ import Axios from 'axios'
 import BASE_URL from '../Constant.js'
 
 const token = localStorage.getItem('token')
+
 const config = {
   headers: { Authorization: `Bearer ${token}` }
 };
@@ -18,7 +19,7 @@ export const computeFilteredExpenses = (expenses,year) =>{
 }
 
 export const getAllExpenses = async ()=>{
-   
+  // console.log(config)
     try{
       const { data: {status, message, data} } =   await Axios.get(`${BASE_URL}/expenses`,config);
       return {
