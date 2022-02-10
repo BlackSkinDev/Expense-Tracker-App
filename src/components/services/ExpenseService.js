@@ -19,7 +19,6 @@ export const computeFilteredExpenses = (expenses,year) =>{
 }
 
 export const getAllExpenses = async ()=>{
-  // console.log(config)
     try{
       const { data: {status, message, data} } =   await Axios.get(`${BASE_URL}/expenses`,config);
       return {
@@ -58,3 +57,24 @@ export const getAllExpenses = async ()=>{
       }
           
     }
+
+
+    export const deleteExpense = async (expenseId) => {
+      try{
+        const { data: {status, message, data} } =   await Axios.delete(`${BASE_URL}/expenses/${expenseId}`,config);
+        return {
+          status,
+          message,
+          data
+        };
+      }
+      catch(error){
+        const {data:{message},status}=error.response
+        return {
+            status,
+            message,
+        }
+      }
+          
+    }
+  

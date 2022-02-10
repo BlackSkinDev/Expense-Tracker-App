@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import ExpenseItemsList from './ExpenseItemsList';
 import NewExpense from './NewExpense';
 import ExpenseFilter from './ExpenseFilter';
-import  {computeFilteredExpenses,getAllExpenses,saveExpense} from '../services/ExpenseService';
+import  {computeFilteredExpenses,getAllExpenses,saveExpense,deleteExpense} from '../services/ExpenseService';
 import ExpensesChart from './ExpensesChart';
 import {useNavigate } from "react-router-dom";
 import LogoutButton from '../Auth/Buttons/LogoutButton'
@@ -44,11 +44,19 @@ const Expenses = ()=> {
       //   setFilteredExpenses(previousFilteredExpenses=>{
       //      return[response.data, ...filteredExpenses]
       //  });
-     }
-   
-      
+     }      
+  }
 
-      
+  const deleteExpenseHandler = async(expenseId)=>{
+    
+    if(window.confirm('Delete Expense?')){
+        const response = await deleteExpense(expenseId);
+        if(response.status ==='success'){
+          alert(response.message);
+          window.location.reload();
+        }
+    }
+
   }
 
   const onChangeFilterHandler = (e) => {
@@ -70,26 +78,33 @@ const Expenses = ()=> {
     const token  = localStorage.getItem('token')
     if (!token){
       alert("Please login to manage your expenses!")
-      navigate("/register")
+      navigate("/login")
     }
     else{
-          const fetchUserExpenses = async () => {
-            const response = await getAllExpenses()
-              if (response.status===401) {
-                  alert("You session has expired, Please Login again.");
-                  navigate('/login');
-              }
-            setIsLoading(false);
-          
-            setExpenses(previousExpenses=>{
+        if(token===''){
+          alert("You session has expired, Please Login again.");
+          navigate('/login');
+        }
+        else{
+            const fetchUserExpenses = async () => {
+              const response = await getAllExpenses()
+                // if (response.status===401) {
+                //     alert("You session has expired, Please Login again.");
+                //     navigate('/login');
+                // }
+              setIsLoading(false);
+            
+              setExpenses(previousExpenses=>{
+                  return[...response.data]
+              });
+            
+              setFilteredExpenses(previousFilteredExpenses=>{
                 return[...response.data]
-            });
+              });   
+          }        
+          fetchUserExpenses()
+        }
           
-            setFilteredExpenses(previousFilteredExpenses=>{
-              return[...response.data]
-            });   
-        }        
-        fetchUserExpenses()
     }
     
      
@@ -106,7 +121,7 @@ const Expenses = ()=> {
                <LogoutButton/>
               <ExpenseFilter  onChangeFilter={onChangeFilterHandler}/>
                 <ExpensesChart expenses={filteredExpenses} />
-                <ExpenseItemsList expenses={filteredExpenses}/>
+                <ExpenseItemsList expenses={filteredExpenses} deleteExpense={deleteExpenseHandler}  />
                 </>)}
             </div>                               
         </div>

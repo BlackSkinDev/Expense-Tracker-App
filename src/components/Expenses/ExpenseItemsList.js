@@ -3,7 +3,9 @@ import '../styles/Expenses/ExpenseItemsList.css'
 
 function ExpenseItemsList(props) {
 
-  
+const deleteExpenseHandler = (expenseId)=>{
+  props.deleteExpense(expenseId)
+}
 
 
 if (props.expenses.length === 0) {
@@ -16,7 +18,7 @@ if (props.expenses.length === 0) {
           <>
             <ul className="expenses-list">
                 {props.expenses.map((expense) =>
-                    <ExpenseItem expense={expense} key={expense.id} />
+                    <ExpenseItem expense={expense} key={expense.id} deleteExpense={deleteExpenseHandler} />
                 )}
             </ul>
           </>
