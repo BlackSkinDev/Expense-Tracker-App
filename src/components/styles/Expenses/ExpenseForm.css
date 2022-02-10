@@ -24,3 +24,8 @@
   .new-expense__actions {
     text-align: right;
   }
+
+.disabled{
+  background-color:#40005d !important;
+  cursor: not-allowed;
+}

@@ -71,7 +71,7 @@ const Expenseform = (props)=> {
             
             <div className="new-expense__actions">
                 <button type="button" onClick={props.onCancel}>Cancel</button>
-                <button type="submit"  disabled={isSaving} >{!isSaving ?'Add Expense':'Saving Expense...'}</button>
+                <button type="submit" disabled={isSaving} >{!isSaving ?'Add Expense':'Please wait...'}</button>
             </div>
 
         </form>

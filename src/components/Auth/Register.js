@@ -12,11 +12,16 @@ function Register() {
   const navigate = useNavigate();
 
   const [errors,setErrors] = useState([])
+
+  const [errorStatus,setErrorStatus] = useState(false)
+  
   
   const registerHandler = async(userData)=>{
-    
+    setErrorStatus(true)    
+   
      const response =  await registerUser(userData)
      if (response.status ==='error') {
+      setErrorStatus(false)
       setErrors(previousErrors=>{
         return[...response.data]
       });
@@ -43,7 +48,7 @@ function Register() {
           </div> 
           <div className="auth-register-box">
           <a  className="slink" href={'/'}>Home</a>
-          <RegisterForm onSubmit={registerHandler} errors={errors}/>  
+          <RegisterForm onSubmit={registerHandler} errors={errors}  errorStatus={errorStatus} />  
         </div>
     </div>
 }

@@ -11,12 +11,15 @@ const Login = ()=> {
 
   const [errors,setErrors] = useState([])
 
+  const [errorStatus,setErrorStatus] = useState(false)
+  
+
   const submitHandler = async(userData)=>{
-     
+    setErrorStatus(true)    
     const response =  await loginUser(userData)
-    
+ 
      if (response.status ==='error') {
-       
+      setErrorStatus(false)
       if (!response.data){
           setErrors(previousErrors=>{
             return[...[response.message]]
@@ -33,6 +36,7 @@ const Login = ()=> {
        navigate('/');
      }
     
+    
   }
   return <div>
         <h1 className="auth-header">Login</h1>
@@ -45,7 +49,7 @@ const Login = ()=> {
           </div> 
         <div className="auth-login-box">
         <a  className="slink" href={'/'}>Home</a>
-        <LoginForm onSubmit={submitHandler} />      
+        <LoginForm onSubmit={submitHandler} errorStatus={errorStatus}  />      
       </div>
       </div>
 }

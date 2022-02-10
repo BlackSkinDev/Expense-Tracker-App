@@ -9,6 +9,7 @@ function RegisterForm(props) {
   const [password,setPassword] = useState('')
   const [cpassword,setCpassword] = useState('')
   
+  
   const usernameHandler = (e)=>{
       setUsername(e.target.value)
       
@@ -66,7 +67,7 @@ function RegisterForm(props) {
                   
                   <div className="auth-register-form__actions">
                       <Link to={"/login"}><button type="button">Already Registered?</button></Link>
-                      <button type="submit">Register</button>
+                      <button type="submit" disabled={props.errorStatus}>{!props.errorStatus ?'Register':'Please wait...'}</button>
                   </div>    
               </form>
             
