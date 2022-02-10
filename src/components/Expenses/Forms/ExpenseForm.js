@@ -4,6 +4,7 @@ const Expenseform = (props)=> {
     const [title,setTitle] = useState('')
     const [amount,setAmount] = useState('')
     const [date,setDate] = useState('')
+    const [isSaving,setIsSaving] = useState(false)
     
     const errors =props.errors;
     
@@ -21,6 +22,7 @@ const Expenseform = (props)=> {
 
 
     const submitHandler = (e)=>{
+        setIsSaving(true)
         e.preventDefault()
         const expenseData={
             label:title,
@@ -68,7 +70,7 @@ const Expenseform = (props)=> {
             
             <div className="new-expense__actions">
                 <button type="button" onClick={props.onCancel}>Cancel</button>
-                <button type="submit">Add Expense</button>
+                <button type="submit" disabled={isSaving}>{!isSaving ?'Add Expense':'Saving Expense'}</button>
             </div>
 
         </form>
