@@ -1,11 +1,6 @@
 import Axios from 'axios'
 import BASE_URL from '../Constant.js'
 
-const token = localStorage.getItem('token')
-
-const config = {
-  headers: { Authorization: `Bearer ${token}` }
-};
 
 
 export const computeFilteredExpenses = (expenses,year) =>{
@@ -19,6 +14,12 @@ export const computeFilteredExpenses = (expenses,year) =>{
 }
 
 export const getAllExpenses = async ()=>{
+  const token = localStorage.getItem('token')
+
+const config = {
+  headers: { Authorization: `Bearer ${token}`}
+};
+
     try{
       const { data: {status, message, data} } =   await Axios.get(`${BASE_URL}/expenses`,config);
       return {
@@ -39,6 +40,12 @@ export const getAllExpenses = async ()=>{
 
 
   export const saveExpense = async (expense) => {
+    const token = localStorage.getItem('token')
+
+const config = {
+  headers: { Authorization: `Bearer ${token}`}
+};
+
       try{
         const { data: {status, message, data} } =   await Axios.post(`${BASE_URL}/expenses`,expense,config);
         return {
@@ -60,6 +67,12 @@ export const getAllExpenses = async ()=>{
 
 
     export const deleteExpense = async (expenseId) => {
+      const token = localStorage.getItem('token')
+
+const config = {
+  headers: { Authorization: `Bearer ${token}`}
+};
+
       try{
         const { data: {status, message, data} } =   await Axios.delete(`${BASE_URL}/expenses/${expenseId}`,config);
         return {

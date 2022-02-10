@@ -81,34 +81,27 @@ const Expenses = ()=> {
       navigate("/login")
     }
     else{
-        if(token===''){
-          alert("You session has expired, Please Login again.");
-          navigate('/login');
-        }
-        else{
-            const fetchUserExpenses = async () => {
-              const response = await getAllExpenses()
-                // if (response.status===401) {
-                //     alert("You session has expired, Please Login again.");
-                //     navigate('/login');
-                // }
-              setIsLoading(false);
-            
-              setExpenses(previousExpenses=>{
-                  return[...response.data]
-              });
-            
-              setFilteredExpenses(previousFilteredExpenses=>{
-                return[...response.data]
-              });   
+        const fetchUserExpenses = async () => {
+          const response = await getAllExpenses()
+          //console.log(localStorage.getItem('token'))
+          if (response.status===401) {
+                alert("You session has expired, Please Login again.");
+                navigate('/login');
+          }
+          setIsLoading(false);
+        
+          setExpenses(previousExpenses=>{
+              return[...response.data]
+          });
+        
+          setFilteredExpenses(previousFilteredExpenses=>{
+            return[...response.data]
+          });   
           }        
           fetchUserExpenses()
         }
-          
-    }
-    
-     
-  }, [navigate]); // Only re-run the effect if count changes
+  
+      }, [navigate]); // Only re-run the effect if count changes
 
   
   return (
