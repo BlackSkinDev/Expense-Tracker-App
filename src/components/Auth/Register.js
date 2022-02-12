@@ -33,7 +33,7 @@ function Register() {
   }
 
   useEffect(() => {
-    const isLoggedIn  = localStorage.getItem('isLogged')
+    const isLoggedIn  = localStorage.getItem('isLoggedIn')
     if (isLoggedIn){
       navigate('/');
     }
