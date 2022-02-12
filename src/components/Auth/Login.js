@@ -13,7 +13,7 @@ const Login = (props) => {
 
   const [errorStatus,setErrorStatus] = useState(false)
 
-  const [search,setSearch] = useState( useLocation().search)
+  const [authMessage,setAuthMessage] = useState(null)
 
   const location = useLocation();
  
@@ -24,7 +24,8 @@ const Login = (props) => {
     const response =  await loginUser(userData)
  
      if (response.status ==='error') {
-      setErrorStatus(false)
+       setAuthMessage(null)
+       setErrorStatus(false)
       if (!response.data){
           setErrors(previousErrors=>{
             return[...[response.message]]
@@ -50,7 +51,8 @@ const Login = (props) => {
       if (isLoggedIn){
         navigate('/');
       }
-   }, [navigate]); // Only re-run the effect if count changes
+      setAuthMessage(location.state ? location.state.msg : null)
+   }, [location,navigate]); // Only re-run the effect if count changes
 
 
 
@@ -58,7 +60,7 @@ const Login = (props) => {
   return <div>
         <h1 className="auth-header">Login</h1>
         <div className="error-div">
-        <h2>{location.state && location.state.msg}</h2>
+        <h2>{authMessage}</h2>
             <ul className="error-lists">
               {errors.length>0 &&errors.map(err=>{
                   return <li key={err}>{err}</li>
