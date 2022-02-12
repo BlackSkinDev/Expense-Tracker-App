@@ -83,8 +83,12 @@ const Expenses = ()=> {
 
   useEffect(() => {
     const token  = localStorage.getItem('token')
+    const isLoggedIn  = localStorage.getItem('isLoggedIn')
     if (!token){
       navigate('/login',{state:{msg:'Please login to manage your expenses!'}});
+    }
+    else if(!isLoggedIn){
+      navigate('/login',{state:{msg:'Your session has expired, Please Login again.'}});
     }
     else{
         const fetchUserExpenses = async () => {
