@@ -52,6 +52,11 @@ const Expenses = ()=> {
     
     if(window.confirm('Delete Expense?')){
         const response = await deleteExpense(expenseId);
+
+       if(response.status ===401){
+        localStorage.removeItem('isLoggedIn')
+        navigate('/login',{state:{msg:'Your session has expired, Please Login again.'}});
+       }
         
         if(response.status ==='success'){
           alert(response.message);
