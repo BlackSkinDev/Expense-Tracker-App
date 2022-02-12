@@ -20,6 +20,7 @@ const Expenses = ()=> {
   const [isLoading,setIsLoading] = useState(true)
 
   const [errors,setErrors] = useState([])
+
  
   
   
@@ -51,6 +52,7 @@ const Expenses = ()=> {
     
     if(window.confirm('Delete Expense?')){
         const response = await deleteExpense(expenseId);
+        
         if(response.status ==='success'){
           alert(response.message);
           window.location.reload();
@@ -77,16 +79,14 @@ const Expenses = ()=> {
   useEffect(() => {
     const token  = localStorage.getItem('token')
     if (!token){
-      alert("Please login to manage your expenses!")
-      navigate("/login")
+      navigate('/login',{state:{msg:'Please login to manage your expenses!'}});
     }
     else{
         const fetchUserExpenses = async () => {
           const response = await getAllExpenses()
-          //console.log(localStorage.getItem('token'))
           if (response.status===401) {
-                alert("You session has expired, Please Login again.");
-                navigate('/login');
+                localStorage.removeItem('isLoggedIn')
+                navigate('/login',{state:{msg:'Your session has expired, Please Login again.'}});
           }
           setIsLoading(false);
         

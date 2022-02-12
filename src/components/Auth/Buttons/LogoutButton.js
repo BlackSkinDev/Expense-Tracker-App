@@ -8,6 +8,7 @@ const LogoutButton = (props)=> {
     const navigate = useNavigate();
     const logout = ()=>{
         localStorage.removeItem('token');
+        localStorage.removeItem('isLoggedIn');
         alert('Logged out successfully');
         navigate('/login')
     }

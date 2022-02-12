@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
  import {useNavigate } from "react-router-dom";
 import '../styles/Auth/Auth.css'
 import {registerUser} from '../services/AuthService'
@@ -29,14 +29,19 @@ function Register() {
      if (response.status ==='success') {
        alert(response.message)
        navigate('/login');
-     }
-      
-      
- 
-
-    
-     
+     }   
   }
+
+  useEffect(() => {
+    const isLoggedIn  = localStorage.getItem('isLogged')
+    if (isLoggedIn){
+      navigate('/');
+    }
+ }, [navigate]); // Only re-run the effect if count changes
+
+
+
+
   return<div>
           <h1 className="auth-header">Register</h1> 
           <div className="error-div">

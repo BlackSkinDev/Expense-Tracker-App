@@ -1,17 +1,22 @@
 
-import React,{useState} from 'react';
-import { Link,useNavigate } from "react-router-dom";
+import React,{useState,useEffect} from 'react';
+import {useNavigate,useLocation} from "react-router-dom";
 import '../styles/Auth/Auth.css'
 import LoginForm from './Forms/LoginForm'
 import {loginUser} from '../services/AuthService'
 
-const Login = ()=> {
+const Login = (props) => {
 
   const navigate = useNavigate();
 
   const [errors,setErrors] = useState([])
 
   const [errorStatus,setErrorStatus] = useState(false)
+
+  const [search,setSearch] = useState( useLocation().search)
+
+  const location = useLocation();
+ 
   
 
   const submitHandler = async(userData)=>{
@@ -33,14 +38,27 @@ const Login = ()=> {
      }
      if (response.status ==='success') {
        localStorage.setItem('token',response.data.token);
+       localStorage.setItem('isLoggedIn',true);
        navigate('/');
      }
     
     
   }
+
+  useEffect(() => {
+      const isLoggedIn  = localStorage.getItem('isLoggedIn')
+      if (isLoggedIn){
+        navigate('/');
+      }
+   }, [navigate]); // Only re-run the effect if count changes
+
+
+
+
   return <div>
         <h1 className="auth-header">Login</h1>
         <div className="error-div">
+        <h2>{location.state && location.state.msg}</h2>
             <ul className="error-lists">
               {errors.length>0 &&errors.map(err=>{
                   return <li key={err}>{err}</li>

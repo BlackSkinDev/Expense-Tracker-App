@@ -88,10 +88,10 @@
 .error-div{
   margin: 0 auto;
   text-align: center;
+  color: red;
 }
 
 .error-lists li{
-  color: red;
   font-weight: bold; 
   list-style-position: inside;
 }
